@@ -1,2 +1,2 @@
-This template was made by Colorlib (https://colorlib.com)
-Please visit our website for more awesome templates, themes and tools. 
+THIS PROJECT CONTAINS A REGISTRATION PAGE, LOGIN PAGE , AND A MAIN PAGE.
+I HAVE USED CORE PHP AND MYSQL .
