@@ -3,19 +3,25 @@ if(isset($_GET['login'])){
 	// $em=$_GET['email'];
 	// echo $em;
 	$email=$_GET['email1'];
-	echo $email;
+	// echo $email;
 	$password=$_GET['pass'];
 	// $id=$_GET['user_id'];
 	// echo $id;
-	echo $password;
+	// echo $password;
 $sql="SELECT * FROM user_details WHERE email='$email' AND  password='$password' ";
 $res=mysqli_query($connection,$sql);
 $row=mysqli_fetch_array( $res );
-print_r( $row);
-if($res){
+$checkrow=mysqli_num_rows($res);
+// print_r( $row);
+if($checkrow>0){
+
+
 	header("location:http://localhost/project1/main.php?email=". $email);
 
 }else{
+	echo "<br>"."you cannot login .click on  create your  account to register.";
+	
+	
 
 }
 }
@@ -93,7 +99,7 @@ if($res){
 					</div>
 
 					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
+						<a class="txt2" href="../../registration/registration.php">
 							Create your Account
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
