@@ -12,7 +12,12 @@ $checkrows=mysqli_num_rows($check);
 if($checkrows>0){
   echo "customer exist";
 }else{
-  $sql="INSERT INTO user_details(firstname,lastname,email,phone_no,address,password) VALUES('$firstname','$lastname','$email','$phonenum','$address','$password')";
+  $options = [
+    'cost' => 12,
+];
+  $hashedPassword=password_hash($password, PASSWORD_BCRYPT, $options);
+// $hashedPassword=password_hash($password,PASSWORD_DEFAULT);
+  $sql="INSERT INTO user_details(firstname,lastname,email,phone_no,address,password) VALUES('$firstname','$lastname','$email','$phonenum','$address','$hashedPassword')";
   $res=mysqli_query($connection,$sql);
   if($res){
 

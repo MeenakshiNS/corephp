@@ -1,32 +1,37 @@
 <?php  include "../../conn.php";
-if(isset($_GET['login'])){
+if(isset($_POST['login'])){
 	// $em=$_GET['email'];
 	// echo $em;
-	$email=$_GET['email1'];
+	$email=$_POST['email1'];
 	// echo $email;
-	$password=$_GET['pass'];
+	$password=$_POST['pass'];
 	// $id=$_GET['user_id'];
 	// echo $id;
+	 //echo $password;
 	// echo $password;
-$sql="SELECT * FROM user_details WHERE email='$email' AND  password='$password' ";
+
+$sql="SELECT * FROM user_details WHERE email='$email' ";
+
 $res=mysqli_query($connection,$sql);
-$row=mysqli_fetch_array( $res );
-$checkrow=mysqli_num_rows($res);
-// print_r( $row);
-if($checkrow>0){
 
 
-	header("location:http://localhost/project1/main.php?email=". $email);
 
-}else{
-	echo "<br>"."you cannot login .click on  create your  account to register.";
-	
-	
-
+if(mysqli_num_rows($res)>0){
+	while($row=mysqli_fetch_assoc($res)){
+		if(password_verify($password,$row['password'])){
+			// echo "success";
+			header("location:http://localhost/project1/main.php?email=".$email);
+		}else{
+			echo "incorrect";
+		}
+	}
 }
 }
+
+
 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -62,7 +67,7 @@ if($checkrow>0){
 				</div>
 
 				
-				<form class="login100-form validate-form" method="get" action="">
+				<form class="login100-form validate-form" method="POST" action="">
 					<span class="login100-form-title">
 						Member Login
 					</span>
